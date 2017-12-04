@@ -1,0 +1,15 @@
+{
+  "name": "react-app-rewire-awesome-typescript",
+  "version": "0.1.0",
+  "description": "Add awesome-typescript-loader to a react-app-rewired config.",
+  "main": "index.js",
+  "author": "Vinicius Salvati Melquiades <vinicius.melquiades@outlook.com>",
+  "license": "MIT",
+  "private": false,
+  "peerDependencies": {
+    "awesome-typescript-loader": "^3.4.1",
+    "react-app-rewired": "^1.3.5",
+    "react-scripts": "^1.0.17",
+    "tslint-loader": "^3.5.3"
+  }
+}
