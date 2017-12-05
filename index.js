@@ -9,14 +9,15 @@ const { getBabelLoader } = require('react-app-rewired');
 /**
  * @typedef AwesomeTypescriptRewireOptions
  * @property {*} [loaderOptions] - The 'awesome-typescript-loader' loader options
- * @property {boolean} [useTslint] @default true - If set to false, will skip the tslit-loader
+ * @property {string} [tsLoader] @default "awesome-typescript-loader" - The typescript loader to use.
+ * @property {string} [tsLintLoader] @default "tslint-loader" - The tslint-loader to use. If set to null, will disable adding tslint.
  * @property {*} [lintOptions] - The tslint options. See https://www.npmjs.com/package/tslint-loader#loader-options for all options
  */
 
 /**
  * @param {AwesomeTypescriptRewireOptions} [options]
  */
-module.exports = (options = { useTslint: true }) =>
+module.exports = (options = { tsLintLoader: 'tslint-loader' }) =>
 	/**
 	 * @param {string} env
 	 */
@@ -52,22 +53,21 @@ module.exports = (options = { useTslint: true }) =>
 			test: tsExtensionMatcher,
 			use: [
 				{ loader: babelLoader.loader, options: babelLoader.options },
-				{ loader: 'awesome-typescript-loader', options: options.loaderOptions }
+				{ loader: options.tsLoader || 'awesome-typescript-loader', options: options.loaderOptions }
 			]
 		};
 
-		// The rule 0 is the linter.
-		// The rule 1 is the compilation, with all the filters in the oneOf property
-		// So we add the tsRule as the first rule of the compilation
-		config.module.rules[1].oneOf.splice(0, 0, tsRule);
+		// Finds the with the oneOf option. That's usually the rule that do the compilation
+		// Then adds the rule to compile the typescript to it.
+		config.module.rules.filter(rule => rule.oneOf)[0].oneOf.splice(0, 0, tsRule);
 
 		// This adds the tslint rules. It is enabled by default, and can be disabled in the options.
-		if(options.useTslint) {
+		if(options.tsLintLoader) {
 
 			const tsLinterRule = {
 				test: tsExtensionMatcher,
 				enforce: 'pre',
-				loader: 'tslint-loader',
+				loader: options.tsLintLoader,
 				options: options.lintOptions
 			}
 
