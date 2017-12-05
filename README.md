@@ -1,7 +1,11 @@
 # react-app-rewire-awesome-typescript
 Add awesome-typescript-loader to a react-app-rewired config.
 
+**NOT YET TESTED FOR PRODUCTION BUILDS**
+
 ## Usage
+
+See the sample [tsconfig.json](./tsconfig.sample.json) File.
 
 ```javascript
 

@@ -1,0 +1,32 @@
+{
+	"compilerOptions": {
+		"target": "es2017",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"allowJs": true,
+		"jsx": "react",
+		"alwaysStrict": true,
+		"strict": true,
+		"noImplicitAny": true,
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"baseUrl": ".",
+		"rootDir": ".",
+		"paths": {
+			"@app/*": [
+				"./src/*"
+			],
+			"@components/*": [
+				"./src/components/*"
+			]
+		},
+		"forceConsistentCasingInFileNames": true,
+		"rootDirs": [
+			"./src"
+		]
+	},
+	"include": [
+		"./**/*.ts",
+		"./**/*.tsx"
+	]
+}
